@@ -18,6 +18,14 @@ app.post('/api/data', (req, res) => {
   res.json({ message: `Hi ${name}, your data is received!` });
 });
 
+// Serve React build
+app.use(express.static(path.join(__dirname, 'public')));
+
+// React fallback
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

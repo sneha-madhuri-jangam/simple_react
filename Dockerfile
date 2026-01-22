@@ -14,23 +14,29 @@
 
 # EXPOSE 80
 # CMD ["nginx", "-g", "daemon off;"]
-# ---------- Frontend Build ----------
+
+
+
+# ---------- Build React ----------
 FROM node:22.13.1-alpine AS frontend-build
 WORKDIR /frontend
-COPY frontend/package*.json ./
+
+COPY my-app/package*.json ./
 RUN npm install
-COPY frontend .
+COPY my-app .
 RUN npm run build
 
-# ---------- Backend ----------
+# ---------- Runtime ----------
 FROM node:22.13.1-alpine
 WORKDIR /app
 
-COPY backend/package*.json ./
+COPY server/package*.json ./
 RUN npm install
 
-COPY backend .
-COPY --from=frontend-build /frontend/build ./frontend-build
+COPY server .
+COPY --from=frontend-build /frontend/build ./public
 
+ENV PORT=80
 EXPOSE 80
+
 CMD ["node", "server.js"]
