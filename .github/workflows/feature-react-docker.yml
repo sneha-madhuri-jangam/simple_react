@@ -21,7 +21,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
 
       # -------- Frontend (React) --------
       - name: Install frontend dependencies
@@ -39,4 +38,4 @@ jobs:
 
       - name: Backend build (optional)
         working-directory: server
-        run: npm run build || echo "No backend build step defined"
+        run: npm run build || echo "No backend build script defined"
