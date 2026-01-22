@@ -7,9 +7,9 @@ function App() {
       <div>
         <h1>Hey Hi sneha </h1>
 
-<h2>Let's check the whether cloud build trigger working or not </h2>
+<h2>Let's push to the azure container registry </h2>
 {/* <h2>hgkhgh</h2> */}
-<h3>Be still :) </h3>
+{/* <h3>Be still :) </h3> */}
       </div>
     </div>
   );
