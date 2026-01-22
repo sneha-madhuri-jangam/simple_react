@@ -1,0 +1,42 @@
+name: Feature React Docker CI
+
+on:
+  push:
+    branches:
+      - feature/react-docker
+  pull_request:
+    branches:
+      - feature/react-docker
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # -------- Frontend (React) --------
+      - name: Install frontend dependencies
+        working-directory: client
+        run: npm install
+
+      - name: Build frontend
+        working-directory: client
+        run: npm run build
+
+      # -------- Backend (Node.js) --------
+      - name: Install backend dependencies
+        working-directory: server
+        run: npm install
+
+      - name: Backend build (optional)
+        working-directory: server
+        run: npm run build || echo "No backend build step defined"
