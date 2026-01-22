@@ -17,21 +17,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Show repository structure
+        run: ls -la
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
 
-      # -------- Frontend (React) --------
+      # -------- React Frontend (my-app) --------
       - name: Install frontend dependencies
-        working-directory: client
+        working-directory: my-app
         run: npm install
 
       - name: Build frontend
-        working-directory: client
+        working-directory: my-app
         run: npm run build
 
-      # -------- Backend (Node.js) --------
+      # -------- Backend (server) --------
       - name: Install backend dependencies
         working-directory: server
         run: npm install
